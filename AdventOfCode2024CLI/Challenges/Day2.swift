@@ -8,8 +8,7 @@
 import Foundation
 
 public func day2() {
-    let fileURL = Bundle.main.url(forResource: "input2", withExtension: "txt")!
-    let content = try! String(contentsOf: fileURL, encoding: .utf8)
+    let content = content(file: "input2")
 
     var reports: [[Int]] = []
     for line in content.components(separatedBy: "\n") {
@@ -30,7 +29,7 @@ public func day2() {
         var increasings: [Bool] = []
         for i in 1..<report.count {
             increasings.append(report[i] > lastLevel)
-            var diff = abs(report[i] - lastLevel)
+            let diff = abs(report[i] - lastLevel)
             guard diff >= 1 && diff <= 3 else {
                 return false
             }

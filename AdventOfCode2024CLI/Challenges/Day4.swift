@@ -8,8 +8,7 @@
 import Foundation
 
 public func day4() {
-    let fileURL = Bundle.main.url(forResource: "input4", withExtension: "txt")!
-    var content = try! String(contentsOf: fileURL, encoding: .utf8)
+    let content = content(file: "input4")
 
     let lines = content
         .components(separatedBy: "\n")

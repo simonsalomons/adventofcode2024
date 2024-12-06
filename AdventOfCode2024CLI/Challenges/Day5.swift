@@ -8,8 +8,7 @@
 import Foundation
 
 public func day5() {
-    let fileURL = Bundle.main.url(forResource: "input5", withExtension: "txt")!
-    let content = try! String(contentsOf: fileURL, encoding: .utf8)
+    let content = content(file: "input5")
 
     struct Rule: Hashable, CustomDebugStringConvertible {
         let first: Int

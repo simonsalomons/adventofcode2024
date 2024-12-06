@@ -8,8 +8,7 @@
 import Foundation
 
 public func day1() {
-    let fileURL = Bundle.main.url(forResource: "input1", withExtension: "txt")!
-    let content = try! String(contentsOf: fileURL, encoding: .utf8)
+    let content = content(file: "input1")
 
     var list1: [Int] = []
     var list2: [Int] = []

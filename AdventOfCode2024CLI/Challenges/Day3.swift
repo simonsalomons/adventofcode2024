@@ -8,8 +8,7 @@
 import Foundation
 
 public func day3() {
-    let fileURL = Bundle.main.url(forResource: "input3", withExtension: "txt")!
-    var content = try! String(contentsOf: fileURL, encoding: .utf8)
+    var content = content(file: "input3")
 
     // Part 2 (comment out for part 1)
     let dos = content.components(separatedBy: "do()").compactMap({ $0.components(separatedBy: "don't()").first })
