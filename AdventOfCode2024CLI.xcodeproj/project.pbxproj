@@ -39,6 +39,9 @@
 				Resources/input5.txt,
 				Resources/input6.txt,
 				Resources/input7.txt,
+				Resources/input8_sample.txt,
+				Resources/input8_sample2.txt,
+				Resources/input8.txt,
 			);
 			target = F496BE9F2D036EA200D56C51 /* Inputs */;
 		};
