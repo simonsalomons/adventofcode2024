@@ -28,31 +28,9 @@
 		F496BEA02D036EA200D56C51 /* Inputs.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Inputs.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
-/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		F496BEA62D036EB200D56C51 /* Exceptions for "AdventOfCode2024CLI" folder in "Inputs" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Resources/input1.txt,
-				Resources/input2.txt,
-				Resources/input3.txt,
-				Resources/input4.txt,
-				Resources/input5.txt,
-				Resources/input6.txt,
-				Resources/input7.txt,
-				Resources/input8_sample.txt,
-				Resources/input8_sample2.txt,
-				Resources/input8.txt,
-			);
-			target = F496BE9F2D036EA200D56C51 /* Inputs */;
-		};
-/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F496BE822D036ADB00D56C51 /* AdventOfCode2024CLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				F496BEA62D036EB200D56C51 /* Exceptions for "AdventOfCode2024CLI" folder in "Inputs" target */,
-			);
 			path = AdventOfCode2024CLI;
 			sourceTree = "<group>";
 		};
