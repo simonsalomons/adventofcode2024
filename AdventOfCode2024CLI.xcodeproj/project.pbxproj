@@ -28,9 +28,22 @@
 		F496BEA02D036EA200D56C51 /* Inputs.bundle */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Inputs.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		F42EA6292D0802AF00295FF0 /* Exceptions for "AdventOfCode2024CLI" folder in "Inputs" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Resources/input10.txt,
+			);
+			target = F496BE9F2D036EA200D56C51 /* Inputs */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		F496BE822D036ADB00D56C51 /* AdventOfCode2024CLI */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				F42EA6292D0802AF00295FF0 /* Exceptions for "AdventOfCode2024CLI" folder in "Inputs" target */,
+			);
 			path = AdventOfCode2024CLI;
 			sourceTree = "<group>";
 		};
