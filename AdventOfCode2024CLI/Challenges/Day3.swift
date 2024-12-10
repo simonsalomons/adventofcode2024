@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day3() {
+func day3() {
     var content = content(file: "input3")
 
     // Part 2 (comment out for part 1)

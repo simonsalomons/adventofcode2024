@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day8() {
+func day8() {
     var grid = content(file: "input8").grid()
 
     var placesPerNode: [Character: [Pos]] = [:]

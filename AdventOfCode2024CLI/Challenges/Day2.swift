@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day2() {
+func day2() {
     let reports = content(file: "input2").lines { string in
         let components = string.components(separatedBy: " ").compactMap({ string -> Int? in
             guard let int = Int(string) else {

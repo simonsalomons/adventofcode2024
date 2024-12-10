@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day10() {
+func day10() {
     let grid = content(file: "input10")
         .grid({ Int("\($0)")! })
 

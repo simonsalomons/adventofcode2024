@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day4() {
+func day4() {
     let grid = content(file: "input4").grid()
 
     // Returns the amount of xmasses found starting at the given point

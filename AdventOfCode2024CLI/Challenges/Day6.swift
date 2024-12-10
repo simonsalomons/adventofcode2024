@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day6() {
+func day6() {
     var grid = content(file: "input6").grid({ Space(character: $0) })
 
     var guardPos = Pos(x: 0, y: 0)

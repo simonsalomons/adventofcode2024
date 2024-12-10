@@ -5,7 +5,7 @@
 //  Created by Simon Salomons on 06/12/2024.
 //
 
-public func day7() {
+func day7() {
     struct Equation {
         let testValue: Int
         let operands: [Int]

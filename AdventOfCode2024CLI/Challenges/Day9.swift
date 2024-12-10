@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day9() {
+func day9() {
     let content = content(file: "input9").trimmingCharacters(in: .whitespacesAndNewlines)
 
     enum Block {

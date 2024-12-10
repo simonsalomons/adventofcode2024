@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day5() {
+func day5() {
     let content = content(file: "input5")
 
     struct Rule: Hashable, CustomDebugStringConvertible {

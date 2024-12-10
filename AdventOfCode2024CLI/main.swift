@@ -7,5 +7,5 @@
 
 import Foundation
 
-day2()
+day11()
 

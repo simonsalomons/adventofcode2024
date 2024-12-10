@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func day1() {
+func day1() {
     let content = content(file: "input1")
 
     var list1: [Int] = []
