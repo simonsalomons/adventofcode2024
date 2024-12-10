@@ -32,6 +32,15 @@
 		F42EA6292D0802AF00295FF0 /* Exceptions for "AdventOfCode2024CLI" folder in "Inputs" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Resources/input1.txt,
+				Resources/input2.txt,
+				Resources/input3.txt,
+				Resources/input4.txt,
+				Resources/input5.txt,
+				Resources/input6.txt,
+				Resources/input7.txt,
+				Resources/input8.txt,
+				Resources/input9.txt,
 				Resources/input10.txt,
 			);
 			target = F496BE9F2D036EA200D56C51 /* Inputs */;

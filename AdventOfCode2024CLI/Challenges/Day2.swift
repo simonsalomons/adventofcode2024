@@ -8,19 +8,15 @@
 import Foundation
 
 public func day2() {
-    let content = content(file: "input2")
-
-    var reports: [[Int]] = []
-    for line in content.components(separatedBy: "\n") {
-        let components = line.components(separatedBy: " ").compactMap({ string -> Int? in
+    let reports = content(file: "input2").lines { string in
+        let components = string.components(separatedBy: " ").compactMap({ string -> Int? in
             guard let int = Int(string) else {
                 return nil
             }
             return int
         })
-        guard !components.isEmpty else { continue }
 
-        reports.append(components)
+        return components
     }
 
     func isReportSafe(_ report: [Int]) -> Bool {

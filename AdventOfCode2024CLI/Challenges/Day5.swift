@@ -20,19 +20,13 @@ public func day5() {
     }
 
     let contents = content.components(separatedBy: "\n\n")
-    let rules = Set(contents[0]
-        .components(separatedBy: "\n")
-        .map({ string in
-            let components = string.components(separatedBy: "|").compactMap({ Int($0) })
-            return Rule(first: components[0], second: components[1])
-        }))
-    let updates = contents[1]
-        .components(separatedBy: "\n")
-        .compactMap { string -> [Int]? in
-            let ints = string.components(separatedBy: ",").compactMap({ Int($0) })
-            guard !ints.isEmpty else { return nil }
-            return ints
-        }
+    let rules = Set(contents[0].lines { string in
+        let components = string.components(separatedBy: "|").compactMap({ Int($0) })
+        return Rule(first: components[0], second: components[1])
+    })
+    let updates = contents[1].lines({ string in
+        string.components(separatedBy: ",").compactMap({ Int($0) })
+    })
 
     func isUpdateValid(_ update: [Int], withRules rules: Set<Rule>) -> Bool {
         var forbiddenPages: Set<Int> = []

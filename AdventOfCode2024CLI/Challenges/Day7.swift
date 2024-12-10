@@ -6,24 +6,20 @@
 //
 
 public func day7() {
-    let content = content(file: "input7")
-
     struct Equation {
         let testValue: Int
         let operands: [Int]
     }
 
-    let equations = content
-        .split(separator: "\n", omittingEmptySubsequences: true)
-        .map { string in
-            let components = string.split(separator: ":")
-            return Equation(
-                testValue: Int(components[0])!,
-                operands: components[1]
-                    .split(separator: " ", omittingEmptySubsequences: true)
-                    .map({ Int($0)! })
-            )
-        }
+    let equations = content(file: "input7").lines { string in
+        let components = string.split(separator: ":")
+        return Equation(
+            testValue: Int(components[0])!,
+            operands: components[1]
+                .split(separator: " ", omittingEmptySubsequences: true)
+                .map({ Int($0)! })
+        )
+    }
 
     func solve(operands: [Int], operations: [(Int, Int) -> Int]) -> Set<Int> {
         var operands = operands

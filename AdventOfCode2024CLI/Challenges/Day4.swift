@@ -8,46 +8,13 @@
 import Foundation
 
 public func day4() {
-    let content = content(file: "input4")
-
-    let lines = content
-        .components(separatedBy: "\n")
-        .compactMap({ line -> [Character]? in
-            guard !line.isEmpty else { return nil }
-
-            return Array(line)
-        })
-
-    enum Direction: CaseIterable {
-        case right, left, up, down, upRight, upLeft, downRight, downLeft
-
-        var offsetX: Int {
-            switch self {
-            case .right, .upRight, .downRight:
-                return 1
-            case .left, .upLeft, .downLeft:
-                return -1
-            case .up, .down:
-                return 0
-            }
-        }
-        var offsetY: Int {
-            switch self {
-            case .up, .upRight, .upLeft:
-                return -1
-            case .down, .downLeft, .downRight:
-                return 1
-            case .right, .left:
-                return 0
-            }
-        }
-    }
+    let grid = content(file: "input4").grid()
 
     // Returns the amount of xmasses found starting at the given point
-    func findXmasses(x: Int, y: Int) -> Int {
+    func findXmasses(pos: Pos) -> Int {
         var count = 0
-        for direction in Direction.allCases {
-            if findXmas(x: x, y: y, offsetX: direction.offsetX, offsetY: direction.offsetY) {
+        for direction in Direction.all {
+            if findXmas(pos: pos, offset: direction.offset) {
                 count += 1
             }
         }
@@ -55,28 +22,18 @@ public func day4() {
     }
 
     // Returns true if xmax is found at the given point with the given offsets
-    func findXmas(x: Int, y: Int, offsetX: Int, offsetY: Int) -> Bool {
-        guard findLetter("M", x: x + offsetX, y: y + offsetY) else { return false }
-        guard findLetter("A", x: x + offsetX * 2, y: y + offsetY * 2) else { return false }
-        guard findLetter("S", x: x + offsetX * 3, y: y + offsetY * 3) else { return false }
+    func findXmas(pos: Pos, offset: Pos) -> Bool {
+        guard grid.at(pos + offset) == "M" else { return false }
+        guard grid.at(pos + offset * 2) == "A" else { return false }
+        guard grid.at(pos + offset * 3) == "S" else { return false }
+
         return true
     }
 
-    // Returns true if the location is valid and the letter is found
-    func findLetter(_ letter: Character, x: Int, y: Int) -> Bool {
-        guard x >= 0, y >= 0 else { return false }
-        guard y < lines.count else { return false}
-        guard x < lines[y].count else { return false }
-
-        return lines[y][x] == letter
-    }
-
     var count = 0
-    for y in 0..<lines.count {
-        for x in 0..<lines[y].count {
-            if lines[y][x] == "X" {
-                count += findXmasses(x: x, y: y)
-            }
+    grid.loop { pos, element in
+        if element == "X" {
+            count += findXmasses(pos: pos)
         }
     }
 
@@ -84,26 +41,30 @@ public func day4() {
 
     // Part 2
 
-    func findMasX(x: Int, y: Int) -> Bool {
-        findMasé(x: x, y: y) && findMasè(x: x, y: y)
+    func findMasX(pos: Pos) -> Bool {
+        findMasé(pos: pos) && findMasè(pos: pos)
     }
 
-    func findMasè(x: Int, y: Int) -> Bool {
-        (findLetter("M", x: x - 1, y: y - 1) && findLetter("S", x: x + 1, y: y + 1))
-        || (findLetter("S", x: x - 1, y: y - 1) && findLetter("M", x: x + 1, y: y + 1))
+    func findMasè(pos: Pos) -> Bool {
+        let pos1 = pos - Pos(x: 1, y: 1)
+        let pos2 = pos + Pos(x: 1, y: 1)
+
+        return (grid.at(pos1) == "M" && grid.at(pos2) == "S")
+        || (grid.at(pos1) == "S" && grid.at(pos2) == "M")
     }
 
-    func findMasé(x: Int, y: Int) -> Bool {
-        (findLetter("M", x: x - 1, y: y + 1) && findLetter("S", x: x + 1, y: y - 1))
-        || (findLetter("S", x: x - 1, y: y + 1) && findLetter("M", x: x + 1, y: y - 1))
+    func findMasé(pos: Pos) -> Bool {
+        let pos1 = pos + Pos(x: -1, y: 1)
+        let pos2 = pos + Pos(x: 1, y: -1)
+
+        return (grid.at(pos1) == "M" && grid.at(pos2) == "S")
+        || (grid.at(pos1) == "S" && grid.at(pos2) == "M")
     }
 
     var count2 = 0
-    for y in 0..<lines.count {
-        for x in 0..<lines[y].count {
-            if lines[y][x] == "A" && findMasX(x: x, y: y) {
-                count2 += 1
-            }
+    grid.loop { pos, element in
+        if element == "A" && findMasX(pos: pos) {
+            count2 += 1
         }
     }
     print(count2)

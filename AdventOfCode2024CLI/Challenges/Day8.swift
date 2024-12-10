@@ -8,24 +8,15 @@
 import Foundation
 
 public func day8() {
-    let content = content(file: "input8")
+    var grid = content(file: "input8").grid()
 
-    struct Pos: Hashable {
-        let x: Int
-        let y: Int
-    }
+    var placesPerNode: [Character: [Pos]] = [:]
 
-    var placesPerNode: [String: [Pos]] = [:]
-
-    var lines = content
-        .split(separator: "\n", omittingEmptySubsequences: true)
-        .map({ $0.map({ "\($0)" }) })
-
-    for y in 0..<lines.count {
-        for x in 0..<lines[y].count where lines[y][x] != "." {
-            var places = placesPerNode[lines[y][x]] ?? []
+    for y in 0..<grid.count {
+        for x in 0..<grid[y].count where grid[y][x] != "." {
+            var places = placesPerNode[grid[y][x]] ?? []
             places.append(Pos(x: x, y: y))
-            placesPerNode[lines[y][x]] = places
+            placesPerNode[grid[y][x]] = places
         }
     }
 
@@ -33,12 +24,7 @@ public func day8() {
 
     // Returns true if inside bounds
     @discardableResult func addAntinode(_ pos: Pos) -> Bool {
-        guard pos.x >= 0,
-              pos.y >= 0,
-              pos.y < lines.count,
-              pos.x < lines[pos.y].count else {
-            return false
-        }
+        guard grid.contains(pos) else { return false }
         antinodes.insert(pos)
         return true
     }
@@ -90,11 +76,9 @@ public func day8() {
     }
 
     for antinode in antinodes {
-        lines[antinode.y][antinode.x] = "#"
+        grid.set("#", at: antinode)
     }
-    for line in lines {
-        print(line.joined(separator: ""))
-    }
+    grid.print()
     print()
     print(antinodes.count)
 }
