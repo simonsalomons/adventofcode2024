@@ -14,4 +14,14 @@ extension String {
     func lines<T>(_ map: (Substring) -> T = { $0 }) -> [T] {
         split(separator: "\n", omittingEmptySubsequences: true).map(map)
     }
+
+    func numbers() -> [Int] {
+        split(separator: " ", omittingEmptySubsequences: true).compactMap({ Int($0) })
+    }
+}
+
+extension Substring {
+    func numbers() -> [Int] {
+        String(self).numbers()
+    }
 }

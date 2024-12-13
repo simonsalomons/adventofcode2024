@@ -44,6 +44,7 @@
 				Resources/input10.txt,
 				Resources/input11.txt,
 				Resources/input12.txt,
+				Resources/input13.txt,
 			);
 			target = F496BE9F2D036EA200D56C51 /* Inputs */;
 		};
@@ -167,6 +168,8 @@
 			);
 			mainGroup = F496BE772D036ADB00D56C51;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = F496BE812D036ADB00D56C51 /* Products */;
 			projectDirPath = "";

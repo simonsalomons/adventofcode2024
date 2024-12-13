@@ -8,16 +8,13 @@
 import Foundation
 
 func day1() {
-    let content = content(file: "input1")
+    let lines = content(file: "input1").lines({ $0.numbers() })
 
     var list1: [Int] = []
     var list2: [Int] = []
-    for line in content.components(separatedBy: "\n") {
-        let components = line.components(separatedBy: "   ")
-        guard components.count == 2 else { continue }
-
-        list1.append(Int(components[0])!)
-        list2.append(Int(components[1])!)
+    for line in lines {
+        list1.append(line[0])
+        list2.append(line[1])
     }
 
     list1.sort()

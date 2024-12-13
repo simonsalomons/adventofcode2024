@@ -6,8 +6,8 @@
 //
 
 struct Pos: Hashable {
-    let x: Int
-    let y: Int
+    var x: Int
+    var y: Int
 }
 
 func +(lhs: Pos, rhs: Pos) -> Pos {
