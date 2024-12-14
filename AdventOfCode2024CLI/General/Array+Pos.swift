@@ -28,9 +28,9 @@ extension Array {
         self[pos.y][pos.x] = value
     }
 
-    func print<T>() where Element == [T] {
+    func print<T>(_ map: (T) -> String = { "\($0)" }) where Element == [T] {
         for line in self {
-            Swift.print(line.map({ "\($0)" }).joined())
+            Swift.print(line.map(map).joined())
         }
     }
 
