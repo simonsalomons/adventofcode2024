@@ -42,6 +42,12 @@ extension Array {
         }
     }
 
+    mutating func swap<T>(pos pos1: Pos, andPos pos2: Pos) where Element == [T] {
+        let temp = self.at(pos1)!
+        self.set(self.at(pos2)!, at: pos1)
+        self.set(temp, at: pos2)
+    }
+
     @discardableResult func first<T>(where closure: (_ pos: Pos, _ element: T) -> Bool) -> (Pos, T)? where Element == [T] {
         for y in 0..<self.count {
             for x in 0..<self[y].count {

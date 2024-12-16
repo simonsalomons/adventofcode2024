@@ -57,6 +57,21 @@ enum Direction: Int {
         }
     }
 
+    init?(_ character: Character) {
+        switch character {
+        case "<":
+            self = .left
+        case ">":
+            self = .right
+        case "^":
+            self = .up
+        case "v":
+            self = .down
+        default:
+            return nil
+        }
+    }
+
     mutating func rotate90() {
         switch self {
         case .up:

@@ -13,28 +13,8 @@ func day14() {
         let vel: Pos
     }
 
-    var content = content(file: "input14")
-    var gridSize = Pos(x: 101, y: 103)
-
-//    content = """
-//p=0,4 v=3,-3
-//p=6,3 v=-1,-3
-//p=10,3 v=-1,2
-//p=2,0 v=2,-1
-//p=0,0 v=1,3
-//p=3,0 v=-2,-2
-//p=7,6 v=-1,-3
-//p=3,0 v=-1,-2
-//p=9,3 v=2,3
-//p=7,3 v=-1,2
-//p=2,4 v=2,-3
-//p=9,5 v=-3,-3
-//"""
-//    gridSize = Pos(x: 11, y: 7)
-
-
-
-
+    let content = content(file: "input14")
+    let gridSize = Pos(x: 101, y: 103)
 
     var robots = content.lines { string in
         let components = string.split(separator: " ")
@@ -42,7 +22,6 @@ func day14() {
         let vel = components[1].components(separatedBy: "=")[1].components(separatedBy: ",").map({ Int($0)! })
         return Robot(pos: Pos(x: pos[0], y: pos[1]), vel: Pos(x: vel[0], y: vel[1]))
     }
-    let seconds = 100
 
     let mid = Pos(x: gridSize.x / 2,
                   y: gridSize.y / 2)
@@ -98,14 +77,14 @@ func day14() {
     }
 
     var minSafetyIndex = Int.max
-    for i in 0..<Int.max {
+    for i in 0..<(gridSize.x*gridSize.y) {
         let safetyIndex = move(seconds: 1)
 
         if safetyIndex < minSafetyIndex {
             minSafetyIndex = safetyIndex
-            print("Grid at \(i + 1) seconds")
             printGrid()
-            print() // Put breakpoint here. Run and watch console until tree appears
+            print("Grid at \(i + 1) seconds")
+            print()
         }
     }
 
