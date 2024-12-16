@@ -15,6 +15,27 @@ enum Direction: Int {
         [.right, .left, .up, .down, .upRight, .upLeft, .downRight, .downLeft]
     }
 
+    var opposite: Direction {
+        switch self {
+        case .right:
+                .left
+        case .left:
+                .right
+        case .up:
+                .down
+        case .down:
+                .up
+        case .upRight:
+                .downLeft
+        case .upLeft:
+                .downRight
+        case .downLeft:
+                .upRight
+        case .downRight:
+                .upLeft
+        }
+    }
+
     var offset: Pos {
         switch self {
         case .right:
@@ -90,6 +111,27 @@ enum Direction: Int {
             self = .upLeft
         case .upLeft:
             self = .upRight
+        }
+    }
+
+    mutating func rotateMinus90() {
+        switch self {
+        case .up:
+            self = .left
+        case .right:
+            self = .up
+        case .down:
+            self = .right
+        case .left:
+            self = .down
+        case .upRight:
+            self = .upLeft
+        case .downRight:
+            self = .upRight
+        case .downLeft:
+            self = .downRight
+        case .upLeft:
+            self = .downLeft
         }
     }
 }
