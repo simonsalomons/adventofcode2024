@@ -24,13 +24,12 @@ func day17() {
     let components = content.split(separator: "\n\n")
     let values = components[0].lines({ Int($0.split(separator: ":")[1].trimmingCharacters(in: .whitespaces))! })
     let reg = Register(a: values[0], b: values[1], c: values[2])
-    let program = components[1].split(separator: ":")[1].trimmingCharacters(in: .whitespacesAndNewlines)
+    let program = components[1].split(separator: ":")[1].trimmingCharacters(in: .whitespacesAndNewlines).split(separator: ",").map({ Int($0)! })
 
-    func run(_ program: String, register: Register) -> String {
+    func run(_ program: [Int], register: Register) -> String {
         var reg = register
-        let program = program.split(separator: ",").map({ Int($0)! })
 
-        func comboOperand(for operand: Int) -> Int {
+        func combo(_ operand: Int) -> Int {
             switch operand {
             case 0...3:
                 return operand
@@ -52,32 +51,32 @@ func day17() {
             let operand = program[pointer + 1]
 
             switch instruction {
-            case .adv:
-                reg.a = Int(Double(reg.a) / pow(2.0, Double(comboOperand(for: operand))))
+            case .adv: // 0
+                reg.a = reg.a >> combo(operand)
 
-            case .bxl:
+            case .bxl: // 1
                 reg.b = reg.b ^ operand
 
-            case .bst:
-                reg.b = comboOperand(for: operand) % 8
+            case .bst: // 2
+                reg.b = combo(operand) % 8
 
-            case .jnz:
+            case .jnz: // 3
                 guard reg.a != 0 else { break }
 
                 pointer = operand
                 continue
 
-            case .bxc:
+            case .bxc: // 4
                 reg.b = reg.b ^ reg.c
 
-            case .out:
-                output.append(comboOperand(for: operand) % 8)
+            case .out: // 5
+                output.append(combo(operand) % 8)
 
-            case .bdv:
-                reg.b = Int(Double(reg.a) / pow(2.0, Double(comboOperand(for: operand))))
+            case .bdv: // 6
+                reg.b = reg.a >> combo(operand)
 
-            case .cdv:
-                reg.c = Int(Double(reg.a) / pow(2.0, Double(comboOperand(for: operand))))
+            case .cdv: // 7
+                reg.c = reg.a >> combo(operand)
 
             }
 
@@ -89,7 +88,35 @@ func day17() {
 
     // Part 1
     print(run(program, register: reg))
+    // 6,7,5,2,1,3,5,1,7
 
     // Part 2
-    print("I don't know")
+    func findA(program: [Int], startAt answer: Int) -> Int? {
+        if program.isEmpty { return answer }
+
+        for i in 0..<8 {
+            let a = answer << 3 | i
+            var b = a % 8
+            b = b ^ 3
+            let c = a >> b
+            b = b ^ 5
+            b = b ^ c
+            let output = b % 8
+            if output == program.last && a != 0 {
+                var program = program
+                program.removeLast()
+                if let sub = findA(program: program, startAt: a) {
+                    return sub
+                }
+            }
+        }
+        return nil
+    }
+
+    if let part2 = findA(program: program, startAt: 0) {
+        print(part2)
+        // 216549846240877
+    } else {
+        print("No solution found")
+    }
 }
