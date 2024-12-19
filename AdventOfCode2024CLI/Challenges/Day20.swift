@@ -6,5 +6,9 @@
 //
 
 func day20() {
-    let _ = content(file: "input20")
+    var content = content(file: "input20")
+
+    content = """
+
+"""
 }
