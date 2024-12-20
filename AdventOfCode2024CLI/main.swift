@@ -9,7 +9,7 @@ import Foundation
 
 let startTime = DispatchTime.now()
 
-day19()
+day20()
 
 let endTime = DispatchTime.now()
 let elapsed = Duration.nanoseconds(endTime.uptimeNanoseconds - startTime.uptimeNanoseconds)
