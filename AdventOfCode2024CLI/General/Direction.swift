@@ -5,7 +5,7 @@
 //  Created by Simon Salomons on 10/12/2024.
 //
 
-enum Direction: Int {
+enum Direction: Int, CustomDebugStringConvertible {
     case right, left, up, down, upRight, upLeft, downRight, downLeft
 
     static var cardinals: [Direction] {
@@ -60,13 +60,13 @@ enum Direction: Int {
     var debugCharacter: String {
         switch self {
         case .left:
-            return "←"
+            return "<"
         case .right:
-            return "→"
+            return ">"
         case .up:
-            return "↑"
+            return "^"
         case .down:
-            return "↓"
+            return "v"
         case .upRight:
             return "↗"
         case .downRight:
@@ -76,6 +76,10 @@ enum Direction: Int {
         case .downLeft:
             return "↙"
         }
+    }
+
+    var debugDescription: String {
+        debugCharacter
     }
 
     init?(_ character: Character) {

@@ -5,9 +5,13 @@
 //  Created by Simon Salomons on 10/12/2024.
 //
 
-struct Pos: Hashable {
+struct Pos: Hashable, CustomDebugStringConvertible {
     var x: Int
     var y: Int
+
+    var debugDescription: String {
+        return "(\(x),\(y))"
+    }
 }
 
 func +(lhs: Pos, rhs: Pos) -> Pos {
