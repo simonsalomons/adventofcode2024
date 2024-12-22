@@ -6,16 +6,8 @@
 //
 
 func day22() {
-    var content = content(file: "input22")
-
-//    content = """
-//1
-//2
-//3
-//2024
-//"""
-
-    var numbers = content.lines({ Int($0)! })
+    let content = content(file: "input22")
+    let numbers = content.lines({ Int($0)! })
 
     let prune = 16777216
 
@@ -36,7 +28,6 @@ func day22() {
 
             let price = Int("\(String(number).last!)")!
             let change = price - lastPrice
-//            print(number, change)
 
             changes.append(change)
             if changes.count > 4 {
@@ -45,7 +36,6 @@ func day22() {
             if changes.count == 4,
                priceBySequence[changes] == nil {
                 priceBySequence[changes] = price
-//                print(changes, price)
             }
             lastPrice = price
         }
@@ -56,9 +46,7 @@ func day22() {
         }
     }
 
-    let (sequence, price) = bananasBySequence.max(by: { $0.value < $1.value })!
-
-    let part2 = price
+    let part2 = bananasBySequence.max(by: { $0.value < $1.value })!.value
 
     print(part1)
     print(part2)
