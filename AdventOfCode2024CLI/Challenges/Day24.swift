@@ -58,27 +58,27 @@ func day24() {
 //tnw OR pbm -> gnj
 //"""
 
-    content = """
-x00: 0
-x01: 1
-x02: 0
-x03: 1
-x04: 0
-x05: 1
-y00: 0
-y01: 0
-y02: 1
-y03: 1
-y04: 0
-y05: 1
-
-x00 AND y00 -> z05
-x01 AND y01 -> z02
-x02 AND y02 -> z01
-x03 AND y03 -> z03
-x04 AND y04 -> z04
-x05 AND y05 -> z00
-"""
+//    content = """
+//x00: 0
+//x01: 1
+//x02: 0
+//x03: 1
+//x04: 0
+//x05: 1
+//y00: 0
+//y01: 0
+//y02: 1
+//y03: 1
+//y04: 0
+//y05: 1
+//
+//x00 AND y00 -> z05
+//x01 AND y01 -> z02
+//x02 AND y02 -> z01
+//x03 AND y03 -> z03
+//x04 AND y04 -> z04
+//x05 AND y05 -> z00
+//"""
 
 //    content = """
 //x00: 1
@@ -153,19 +153,84 @@ x05 AND y05 -> z00
     let yString = yGates.map({ gateValues[$0]! ? "1" : "0" }).reversed().joined()
     let x = Int(xString, radix: 2)!
     let y = Int(yString, radix: 2)!
-    let expected = x & y
+    let expected = x + y
     var expectedString = String(expected, radix: 2)//.padding(toLength: endGates.count, withPad: "0", startingAt: 0)
     expectedString = String(repeating: "0", count: endGates.count - expectedString.count) + expectedString
 
+    func getUsedGates(for gate: String) -> Set<String> {
+        var allGates: Set<String> = []
+        if !gate.hasPrefix("z") {
+            allGates.insert(gate)
+        }
+        if let operation = gates[gate] {
+            allGates.formUnion(getUsedGates(for: operation.lhs))
+            allGates.formUnion(getUsedGates(for: operation.rhs))
+        }
+        return allGates
+    }
+
+    func printTree(for gate: String, indent: String = "") {
+        print(indent, gate)
+
+        if let operation = gates[gate] {
+            print(indent + "  ", operation.operator.rawValue)
+            printTree(for: operation.lhs, indent: indent + "  ")
+            printTree(for: operation.rhs, indent: indent + "  ")
+        }
+    }
+
+    func switchGates(_ gate1: String, gate2: String) {
+        let tmp = gates[gate1]
+        gates[gate1] = gates[gate2]
+        gates[gate2] = tmp
+    }
+
+//    switchGates("bpf", gate2: "z05")
+//    switchGates("hcc", gate2: "z11")
+//    switchGates("fdw", gate2: "z35")
+//    switchGates("qcw", gate2: "hqc")
+
     var endValues: [Bool] = []
-    for gate in endGates {
+//    var prevCount = 1
+//    var prevUsedGates: Set<String> = []
+    for (index, gate) in endGates.enumerated() {
+//        let usedGates = getUsedGates(for: gate)
+//        var newlyUsedGates = usedGates.subtracting(prevUsedGates)
+//        prevUsedGates = usedGates
+
+//        let i = String(format: "%02d", index)
+//        newlyUsedGates.remove("x\(i)")
+//        newlyUsedGates.remove("y\(i)")
+
+//        print(gate)
+//        print("---------------")
+
+//        print("\(gate):", gates[gate]!.lhs, gates[gate]!.operator.rawValue, gates[gate]!.rhs)
+//        for gate in newlyUsedGates.sorted() {
+//            if let operation = gates[gate] {
+//                print("\(gate):", operation.lhs, operation.operator.rawValue, operation.rhs)
+//            } else {
+//                print("🔴🔴🔴🔴🔴")
+//            }
+//        }
+
+//        if newlyUsedGates.count != 4 {
+//            print("🆘 Ooopsie")
+//        } else {
+//            print("OK")
+//        }
+//        print()
+
         endValues.append(getValue(of: gate))
     }
 
     let string = endValues.reversed().map({ $0 ? "1" : "0" }).joined()
     let part1 = Int(string, radix: 2)!
 
-    print("Expected:", expectedString)
-    print("Received:", string)
+//    print("Expected:", expectedString)
+//    print("Received:", string)
     print(part1)
+
+    // Part 2 (did this by manually looking where things go wrong)
+    print(["bpf", "z05", "hcc", "z11", "fdw", "z35", "qcw", "hqc"].sorted().joined(separator: ","))
 }
